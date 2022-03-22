@@ -129,3 +129,44 @@ print_r($result);
 
 
 ?>
+
+/*
+
+try {
+
+$password = '$2y$14$sP9VIC8upHFqwq/s0A8z9upNWfMhLwc8JB7ncIC9DW/RiuXVjxYsa';
+
+/*$admin = @$_POST["Login"];
+$motdepasse = password_verify(@$_POST["Password"], $password);*/
+
+//echo password_hash($motdepasse,PASSWORD_DEFAULT); 
+
+
+
+//$util = "SELECT * From user where Login='$admin' and Password='$motdepasse'";
+/*$sth = $pdo->prepare($util);
+$sth->execute();
+$result = $sth->fetch();
+$_SESSION['result']=$result;
+
+if (empty($_SESSION['result']) )
+    {
+
+echo "Veuillez entrer votre mot de passe !";
+
+
+}
+
+else {
+   
+//echo 'connexion réussie '; 
+
+  header("location:index.php");
+}
+
+}
+
+
+catch (PDOException $e) {
+    echo 'Impossible de traiter les données. Erreur : ' . $e->getMessage();
+}

@@ -3,16 +3,16 @@ require 'bdd.php';
    
 
 try {
-    // Connexion  
+//     // Connexion  
 
 
 
- if (empty($_SESSION['result'])) {
-     header("location: connexion.php");
-     // echo "Identifiant ou mot de passe incorrect";
+//  if (empty($_SESSION['connecte'])) {
+//      header("location: connexion.php");
+//      // echo "Identifiant ou mot de passe incorrect";
 
 
- }
+//  }
 ?>
 
 
@@ -22,28 +22,39 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Formulaire</title>
 </head>
 
 <body>
-<button><a href="deconnexion.php">Deconnexion</a></button> 
-<button><a href="index.php">Accueil</a></button>
-<h1>Ajouter ou modifier un changement</h1>
+<button class="btn btn-secondary"><a href="deconnexion.php">Deconnexion</a></button> 
+<button class="btn btn-secondary"><a href="index.php">Accueil</a></button>
+
+<?php
+ if (!empty($_GET['id']) && isset($_GET['id'])) {
+
+    echo "<h1>Modifier un changement</h1>";}
+    else {
+        echo "<h1>Ajouter un changement</h1>";
+
+    }
+?>
+
     <div class="container">
-        <form action="ajout.php" method="post">
+        <form class="row g-3" action="ajout.php"  method="post">
         <input type="hidden" name="Id" value="<?php echo $result['Id']; ?>">
-        <div class="">
+        <div class="col-md-6">
                 <label for="date">Date de changement </label>
                 <input type="date" class="" id="date" name="Date"  value="<?php echo $result['Date']; ?>" placeholder="date">
             </div>
-            <div class="">
+            <div class="col-md-6">
                 <label for="etage">Etage</label>
                 <select name="Etage" value="<?php echo $result['Etage'];?>"  id="etage">
+            <?php if (!empty($_GET['id']) && isset($_GET['id'])) { echo "<option >".$result['Etage']."</option>";} else {echo "<option disabled selected hidden>Etage</option>";}?>
                     <option value="RDC">RDC</option>
                     <option value="1er étage">1er étage</option>
                     <option value="2e étage">2e étage</option>
-                    <option value="3">2e étage</option>
+                    <option value="3e étage">3e étage</option>
                     <option value="4e étage">4e étage</option>
                     <option value="5e étage">5e étage</option>
                     <option value="6e étage">6e étage</option>
@@ -57,9 +68,10 @@ try {
             </div>
 
 
-            <div class="">
+            <div class="col-6">
                 <label for="position">Position</label>
-                <select name="Position" value="<?php echo $result['Position'];?>" id="etage">
+                <select name="Position" value="<?php echo $result['Position'];?>" id="Position">
+                <?php if (!empty($_GET['id']) && isset($_GET['id'])) { echo "<option >".$result['Position']."</option>";} else {echo "<option disabled selected hidden>Position</option>";} ?>
                     <option value="Côté gauche">Côté gauche</option>
                     <option value="Côté droit">Côté droit</option>
                     <option value="fond">Fond</option>
@@ -67,13 +79,13 @@ try {
                 </select>
             </div>
 
-            <div class="">
+            <div class="col-6">
                 <label for="prix">Prix</label>
                 <input type="number" class="" id="prix" name="Prix" value="<?php echo $result['Prix']; ?>" placeholder="prix">
             </div>
-            <div class="">
+            <div class="col-6">
 
-                <button type="submit" name="envoyer" value="envoyer">Envoyer</button>
+                <button class="btn btn-secondary" type="submit" name="envoyer" value="envoyer">Envoyer</button>
                 </div>
         </form>
     </div>
