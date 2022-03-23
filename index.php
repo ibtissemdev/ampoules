@@ -6,12 +6,12 @@ try {
 
   // error_log("SESSION : ".print_r($_SESSION, 1));
 
-  //  if (!isset($_SESSION['connecte'])) {
-  //    header("location: connexion.php");
+   if (!isset($_SESSION['connecte'])) {
+    header("location: connexion.php");
   //   // echo "Identifiant ou mot de passe incorrect";
 
 
-  //  }
+    }
 
   //Récupérer le nombre d'enregistrements
   $count=$pdo->prepare("SELECT count(Id) as cpt  FROM historique");
@@ -40,10 +40,10 @@ $debut=($page-1)*$nbr_elements_par_page;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
   </head>
 
@@ -54,10 +54,11 @@ $debut=($page-1)*$nbr_elements_par_page;
 
 
     <div class="container-fluid">
-
+<div class="entete"> 
+  
+<h1>Changement d'ampoules</h1>
 <header><?= $tcount[0]["cpt"];?> Enregistrements au total</header>
 
-    <h1>Changement d'ampoules</h1>
 <div class="pagination">
 <?php 
 for ($i=1; $i<=$nbr_elements_par_page;$i++){
@@ -70,16 +71,17 @@ for ($i=1; $i<=$nbr_elements_par_page;$i++){
   }
 }
 ?>
-
 </div>
-
+</div>
+<div class="tableau">
     <table>
       <tr>
         <th scope="col">Etage</th>
         <th scope="col">Position</th>
         <th scope="col">Prix</th>
         <th scope="col">Date</th>
-        <th scope="col">Action</th>
+        <th scope="col">Suppression</th>
+        <th scope="col">Modification</th>
       </tr>
       <?php for ($i = 0; $i < count($resultat); $i++) { ?>
 
@@ -92,10 +94,11 @@ for ($i=1; $i<=$nbr_elements_par_page;$i++){
           <td><a href="formulaire.php?id=<?php echo $resultat[$i]['Id']; ?>"><button class="btn btn-secondary" name="modifier" value="modifier">Modifier</button></a></td>
         </tr>
       <?php } ?>
+      
     </table>
+    </div>
 
-
-    <button class="btn btn-secondary"><a href="formulaire.php">Ajouter</a></button>
+    <div class="ajouter"><button class="btn btn-info"><a href="formulaire.php">Ajouter</a></button></div>
 
 
 

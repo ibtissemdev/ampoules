@@ -5,14 +5,14 @@
 }
 
 body {
-    background-color: red;
+ margin : 30px 80px;
 }
 
 
 td,
 th {
     border: 1px solid rgb(190, 190, 190);
-    padding: 10px;
+    padding: 5px;
 }
 
 td {
@@ -30,9 +30,30 @@ th[scope="col"] {
 
 th[scope="row"] {
     background-color: #d7d9f2;
+
+}
+
+tr {
+    font-size: 15px;
+}
+
+th{
+    text-align: center;
+    font-size: 20px;
+}
+
+.tableau {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
 }
 
 
+a:hover {
+color :#3eb4c3;
+
+}
 
 table {
     border-collapse: collapse;
@@ -42,4 +63,66 @@ table {
     font-size: .8rem;
 }
 
+.entete {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+}
+
+.entete a {
+    padding-right: 5px;
+    padding-left: 5px;
+   color:black; 
+   border : solid #3eb4c3 2px;
+  
+  
+
+}
+
+header {
+    margin : 10px;
+}
+
+.entete a:hover {
+
+    color: #3eb4c3;
+    background: grey;
+}
+
+.ajouter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin :10px;
+   
+}
+
+button a {
+color:#fff; 
+text-decoration: none;
+font-size: 20px;
+
+}
+
+.mdp {
+
+color :#3eb4c3 ;
+}
+
+
+.entrer {
+margin: 20px;
+    text-align: center;
+}
+
+.btn  {
+
+    margin: 15px;
+}
+
+h1 {
+    text-align: center;
+    margin: 15px;
+}

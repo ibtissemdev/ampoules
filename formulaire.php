@@ -7,12 +7,12 @@ try {
 
 
 
-//  if (empty($_SESSION['connecte'])) {
-//      header("location: connexion.php");
-//      // echo "Identifiant ou mot de passe incorrect";
+  if (empty($_SESSION['connecte'])) {
+     header("location: connexion.php");
+    echo "Identifiant ou mot de passe incorrect";
 
 
-//  }
+  }
 ?>
 
 

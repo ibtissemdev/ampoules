@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Formulaire</title>
 </head>
+
 <body>
+
+
 <div class="container">  
+
+<h1>Identification</h1>
+
 <form class="row g-3" action="" method="post" >
             <div class="col-md-12">
 
@@ -22,80 +29,27 @@
             </div>
           
             <div class="col-md-6">
-              <label for="Email" class="form-label">Email</label>
-              <input type="email"  class="form-control" name="Email" id="Email" placeholder="Entrer l'email" required>
-            </div>
-
-            <div class="col-md-6">
-              <label for="Telephone" class="form-label">Telephone</label>
-              <input type="tel"  maxlength="10" class="form-control" name="Tel" id="Telephone" placeholder="Entrer le numéro de téléphone" required>
-            </div>
-
-            <div class="col-md-6">
             <input type="submit" name='submit' id='submit' value='CONNEXION'>
             </div>
          
-
-
-
           </form>
+
+          <button class="btn btn-secondary"><a href="inscription.php">Je n'ai pas de compte</a></button>
           </div>
-
 </body>
-</html>
 
-<?php 
+<?php
 
-require 'bdd.php' ;
-//$password=password_hash($_POST['Password'],PASSWORD_DEFAULT);
-$_POST['Password']=password_hash($_POST['Password'],PASSWORD_DEFAULT);
-//echo $password;
-$colonne = $_POST;
-  unset($colonne['submit'], $colonne['Id']);
-  //error_log(print_r($colonne,1));
-
-  //Récupérer les clés dans un tableau
-  $colonneName = array_keys($colonne);
-  //error_log(print_r($colonneName,1));
-  //Transforme le tableau en chaîne de caractère en y ajoutant une "," entre chaque élément
-  $colonne1 = implode(",", $colonneName);
-  $colonne2 = implode(",:", $colonneName);
-  $colonne2 = ":" . $colonne2;
-  
-  if (isset($_POST['submit'])) {
-
-    $sth = $pdo->prepare("INSERT INTO user ($colonne1) VALUES ($colonne2)");
-    //Parcour un tableau associatif
-    foreach ($colonne as $key => &$value) {
-    
-        $sth->bindParam(':' . $key, $value);
-      }
-     
-   // }
-    $sth->execute();
-   // header('Location: index.php');
-  } else {
-
-    'erreur';
-  }
+require 'bdd.php';
 
 
 
-/*$login='Ibtissem';
-$password=password_hash('Decembre',PASSWORD_DEFAULT);
-
-                $sth = $pdo->prepare("INSERT INTO user(Login,Password) VALUES (:Login,:Password)");
-                //La constante de type par défaut est STR
-                $sth->bindParam(':Login',$login);
-                $sth->bindParam(':Password',$password);
-                $sth->execute();
-                echo "Entrée ajoutée dans la table";
 
 
-//$password=password_hash('Decembre',PASSWORD_DEFAULT);*/
+//password=password_hash('Decembre',PASSWORD_DEFAULT);
 
 
-/*try {
+try {
   $_SESSION = array();
   if(isset($_POST['submit'])) {
 
@@ -105,7 +59,7 @@ $password=password_hash('Decembre',PASSWORD_DEFAULT);
     //$motdepasse = password_verify(@$_POST["Password"], $password);
 
     //error_log(password_hash('Decembre',PASSWORD_DEFAULT));
-   // error_log(print_r($_POST, 1));
+    //error_log(print_r($_POST["Login"], 1));
     //echo password_hash($motdepasse,PASSWORD_DEFAULT); 
 
 
@@ -117,20 +71,24 @@ $password=password_hash('Decembre',PASSWORD_DEFAULT);
     $sth->execute();
     $result = $sth->fetch();
 
-   // error_log(print_r($result, 1));
-    if (password_verify(@$_POST["Password"],$utilisateur['Password'])==1) {
+    //echo '<pre>',print_r($result),'<pre>';
+
+    error_log(print_r($_POST, 1));
+    error_log(print_r($result, 1));
+
+    if (password_verify(@$_POST["Password"],$result['Password'])==1) {
       $_SESSION['result']=$result;
-     // error_log("Connection successful");
+     error_log("Connection successful");
+    } else {
+        error_log("Connection NOT successful");
+        //header("location:index.php");
     }
-  } else {
-    //error_log("Connection NOT successful");
-    //header("location:index.php");
-  }
+  } 
 
 
   if (empty($_SESSION['result']) ) {
 
-    echo "Veuillez entrer votre mot de passe !";
+    echo "<p class='entrer'>Veuillez entrer votre mot de passe !</p>";
 
 
   } else {
@@ -146,7 +104,8 @@ $password=password_hash('Decembre',PASSWORD_DEFAULT);
 
 catch (PDOException $e) {
     echo 'Impossible de traiter les données. Erreur : ' . $e->getMessage();
-}*/
+}
 
 
 ?>
+
