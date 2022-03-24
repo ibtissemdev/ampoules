@@ -29,6 +29,7 @@ try {
 <body>
 <button class="btn btn-secondary"><a href="deconnexion.php">Deconnexion</a></button> 
 <button class="btn btn-secondary"><a href="index.php">Accueil</a></button>
+<button class="btn btn-secondary"><a href="message.php">Message</a></button>
 
 <?php
  if (!empty($_GET['id']) && isset($_GET['id'])) {
@@ -38,15 +39,14 @@ try {
         echo "<h1>Ajouter un changement</h1>";
 
     }
+    echo $_SESSION['user_id'];
 ?>
 
     <div class="container">
         <form class="row g-3" action="ajout.php"  method="post">
         <input type="hidden" name="Id" value="<?php echo $result['Id']; ?>">
-        <div class="col-md-6">
-                <label for="date">Date de changement </label>
-                <input type="date" class="" id="date" name="Date"  value="<?php echo $result['Date']; ?>" placeholder="date">
-            </div>
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
+       
             <div class="col-md-6">
                 <label for="etage">Etage</label>
                 <select name="Etage" value="<?php echo $result['Etage'];?>"  id="etage">
@@ -83,8 +83,13 @@ try {
                 <label for="prix">Prix</label>
                 <input type="number" class="" id="prix" name="Prix" value="<?php echo $result['Prix']; ?>" placeholder="prix">
             </div>
-            <div class="col-6">
 
+            <div class="col-md-6">
+                <label for="date">Date de changement </label>
+                <input type="date" class="" id="date" name="Date"  value="<?php echo $result['Date']; ?>" placeholder="date">
+            </div>
+
+            <div class="col-6">
                 <button class="btn btn-secondary" type="submit" name="envoyer" value="envoyer">Envoyer</button>
                 </div>
         </form>

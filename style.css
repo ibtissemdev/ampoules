@@ -109,6 +109,7 @@ font-size: 20px;
 .mdp {
 
 color :#3eb4c3 ;
+text-align: center;
 }
 
 
@@ -125,4 +126,35 @@ margin: 20px;
 h1 {
     text-align: center;
     margin: 15px;
+}
+
+.captcha {
+    text-align: center;
+color : blue
+
+}
+
+img {
+    margin: 15px;
+}
+
+.connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.capt {
+display: flex;
+flex-direction: row;
+align-items: center;
+
+}
+.formconnexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btnconnexion {
+    align-items: center;
 }

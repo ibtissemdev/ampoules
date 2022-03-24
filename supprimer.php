@@ -18,7 +18,7 @@ require 'bdd.php';
 
 
 
-if ( !empty($_GET['id']) && ctype_digit($_GET['id'])){
+if ( !empty($_GET['id']) && intval($_GET['id']) ){
     $sql = "DELETE FROM historique WHERE Id= ".$_GET['id'];
     $sth = $pdo->prepare($sql);
     $sth->execute();

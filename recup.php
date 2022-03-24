@@ -49,7 +49,9 @@
 <?php
 
 require 'bdd.php' ;
+if (isset($_POST['captcha'])) {
 
+  if ($_POST['captcha'] == $_SESSION['captcha']) {
 if (isset($_POST['Email']) && $_POST['Tel']){
     error_log("post :".print_r($_POST, 1));
     //$util="SELECT * FROM user WHERE Email=':email' ";//AND Tel=':tel'
@@ -71,7 +73,11 @@ $_POST['Password']=password_hash($_POST['Password'],PASSWORD_DEFAULT);
 
             echo "Email ou téléphone inconnu";
     
-    }}
+    }} } else {
+
+      echo '<h3 class="captcha">Le captcha est invalide !</h3> ';
+    }
+  }
           //MODIFIER
   /*$colonne = $_POST;
   
@@ -103,7 +109,7 @@ $_POST['Password']=password_hash($_POST['Password'],PASSWORD_DEFAULT);
 
 
 ?>
-          
+          <a href="connexion.php"><button class="btn btn-secondary">M'identifier</button></a>
           <script src="script.js"> </script>
 </body>
 </html>
