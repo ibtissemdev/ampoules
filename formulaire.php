@@ -22,7 +22,9 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>Formulaire</title>
 </head>
 
@@ -39,7 +41,7 @@ try {
         echo "<h1>Ajouter un changement</h1>";
 
     }
-    echo $_SESSION['user_id'];
+    //echo $_SESSION['user_id'];
 ?>
 
     <div class="container">

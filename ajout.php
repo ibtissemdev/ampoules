@@ -49,6 +49,8 @@ if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
       $sth->bindParam(':' . $key, $value);
     }
     $sth->execute();
+
+
     header('Location:index.php');
   }catch (Exception $e) {
     echo 'Exception reçue : ',  $e->getMessage(), "\n";

@@ -34,12 +34,12 @@ try {
 <?php
  if (!empty($_GET['id']) && isset($_GET['id'])) {
 
-    echo "<h1>Modifier un changement</h1>";}
+    echo "<h1>Votre message</h1>";}
     else {
-        echo "<h1>Votre message</h1>";
+        echo "<h1>Pas de changement reconnu</h1>";
 
     }
-    echo $_SESSION['user_id'];
+    //echo $_SESSION['user_id'];
 ?>
 
     <div class="container">
@@ -57,6 +57,8 @@ try {
                 <button class="btn btn-secondary" type="submit" name="envoyer" value="envoyer">Envoyer</button>
                 </div>
         </form>
+
+        <a href="index.php"><button>Retour</button></a>
     </div>
 
 
@@ -101,6 +103,16 @@ if (isset($_POST['envoyer'])) {
       $sth->bindParam(':' . $key, $value);
     }
     $sth->execute();
+
+    $result=$pdo->lastInsertId();
+    echo $result;
+    $id= $_GET['id'];
+
+    $sth = $pdo->prepare("UPDATE historique SET message_id= :message_id WHERE Id=$id");
+  
+    $sth->bindParam(':message_id',$result);
+    $sth->execute();
+
     header('Location:index.php');
 
 }

@@ -56,6 +56,13 @@ try {
     <div class="container-fluid">
       <div class="entete">
 
+<form action="recherche.php" method="post">
+  <label for="recherche">Recherche</label>
+<input type="search" name="search" >
+<button name="envoyer">Envoyer</button>
+
+</form>
+
         <h1>Changement d'ampoules</h1>
         <header><?= $tcount[0]["cpt"]; ?> Enregistrements au total</header>
 
@@ -82,6 +89,8 @@ try {
             <th scope="col">Date</th>
             <th scope="col">Suppression</th>
             <th scope="col">Modification</th>
+            <th scope="col">Message</th>
+
           </tr>
           <?php for ($i = 0; $i < count($resultat); $i++) { ?>
 
@@ -92,6 +101,7 @@ try {
               <td><?php echo $resultat[$i]["Date"] ?></td>
               <td><a href="supprimer.php?id=<?php echo $resultat[$i]['Id']; ?>"><button class="btn btn-secondary" onclick="return confirm('Voulez-vous supprimer ?')">Supprimer</button></a></td>
               <td><a href="formulaire.php?id=<?php echo $resultat[$i]['Id']; ?>"><button class="btn btn-secondary" name="modifier" value="modifier">Modifier</button></a></td>
+              <td><a href="message.php?id=<?php echo $resultat[$i]['Id']; ?>"><button class="btn btn-secondary" name="modifier" value="modifier">Message</button></a></td>
             </tr>
           <?php } ?>
 
