@@ -58,6 +58,7 @@ error_log(print_r($resultat,1));
               <td><?php echo $resultat[$i]["Date"] ?></td>
               
             </tr>
+            <?php }?>
         </table>
       </div>
 

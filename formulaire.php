@@ -31,7 +31,7 @@ try {
 <body>
 <button class="btn btn-secondary"><a href="deconnexion.php">Deconnexion</a></button> 
 <button class="btn btn-secondary"><a href="index.php">Accueil</a></button>
-<button class="btn btn-secondary"><a href="message.php">Message</a></button>
+
 
 <?php
  if (!empty($_GET['id']) && isset($_GET['id'])) {
