@@ -20,12 +20,12 @@
       <div class="col-md-10">
 
         <label for="identifiant" class="form-label">Identifiant</label>
-        <input type="text" requierd pattern="^[A-Za-z '-]+$" maxlength="20" class="form-control" name="Login" id="identifiant" placeholder="Entrer votre identifiant" required>
+        <input type="text" requierd pattern="#^[A-Za-zéè '-]+$#" maxlength="20" class="form-control" name="Login" id="identifiant" placeholder="Entrer votre identifiant" required>
       </div>
 
       <div class="col-md-10">
         <label for="motdepasse" class="form-label">Mot de passe</label>
-        <input type="password" requierd pattern="^[A-Za-z '-]+$" maxlength="20" class="form-control" name="Password" id="motdepasse" placeholder="Entrer le mot de passe" required>
+        <input type="password" requierd pattern="#^[A-Za-zéè '-]+$#" maxlength="20" class="form-control" name="Password" id="motdepasse" placeholder="Entrer le mot de passe" required>
       </div>
 
       <a class="mdp" href="recup.php">Mot de passe oublié</a>
@@ -50,13 +50,6 @@
 
 require 'bdd.php';
 
-
-
-
-
-//password=password_hash('Decembre',PASSWORD_DEFAULT);
-
-
 try {
   if (isset($_POST['captcha'])) {
 
@@ -65,16 +58,11 @@ try {
       $_SESSION = array();
       if (isset($_POST['submit'])) {
 
-        //$password='$2y$10$ovbkaB89wFFTBZusEjzMce.3P.KY./oKXGY4r3bvAIgJjwozqIpgW';
-
         $utilisateur = @$_POST["Login"];
-        //$motdepasse = password_verify(@$_POST["Password"], $password);
 
         //error_log(password_hash('Decembre',PASSWORD_DEFAULT));
         //error_log(print_r($_POST["Login"], 1));
         //echo password_hash($motdepasse,PASSWORD_DEFAULT); 
-
-
 
         $util = "SELECT * From user where Login='$utilisateur'";
 
@@ -82,8 +70,6 @@ try {
         $sth = $pdo->prepare($util);
         $sth->execute();
         $result = $sth->fetch();
-
-        //echo '<pre>',print_r($result),'<pre>';
 
         error_log(print_r($_POST, 1));
         error_log(print_r($result, 1));

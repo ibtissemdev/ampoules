@@ -1,6 +1,10 @@
 <?php
 require 'bdd.php';
-   
+function valid_donnees($donnees){
+    $donnees = trim($donnees);
+    $donnees = stripslashes($donnees);
+    $donnees = htmlspecialchars($donnees);
+    return $donnees;  }
 
 try {
 //     // Connexion  
@@ -13,6 +17,8 @@ try {
 
 
   }
+
+  
 ?>
 
 
@@ -22,8 +28,10 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>message</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Message</title>
 </head>
 
 <body>
@@ -43,22 +51,25 @@ try {
 ?>
 
     <div class="container">
-        <form class="row g-3" action=""  method="post">
+        <div class="message">
+        <form class="" action=""  method="post">
         <!--<input type="hidden" name="Id" value="<?php //echo $result['Id']; ?>">!-->
       
-            <div class="col-6">
-                <label for="message">Message</label>
-                <textarea  class="" id="message" name="message" rows="5" cols="33" placeholder="Votre message"></textarea>
+            <div class="">
+                <label for="message">Entrez votre message</label>
+                <textarea onkeyup="valid(this.value)" class="" id="message" pattern="#^[A-Za-zéè '-]+$#" name="message" rows="5" cols="33" placeholder="Votre message"></textarea>
             </div>
 
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
 
-            <div class="col-6">
+            <div class="">
                 <button class="btn btn-secondary" type="submit" name="envoyer" value="envoyer">Envoyer</button>
                 </div>
+                <a href="index.php"><button>Retour</button></a>
         </form>
 
-        <a href="index.php"><button>Retour</button></a>
+     
+        </div>
     </div>
 
 
@@ -98,9 +109,8 @@ if (isset($_POST['envoyer'])) {
     //Parcour un tableau associatif
     foreach ($_POST as $key => &$value) {
       error_log($key." => " .$value);
-      //error_log(print_r($key, 1));
-
-      $sth->bindParam(':' . $key, $value);
+      
+      $sth->bindParam(':' . $key, valid_donnees($value));
     }
     $sth->execute();
 
@@ -124,15 +134,7 @@ if (isset($_POST['envoyer'])) {
 
 } 
   
-
-
-
 ?>
 </body>
-
-
-
 </html>
-
-
-
+<script src="script.js"></script>

@@ -4,17 +4,12 @@ require 'bdd.php';
 
 try {
 //     // Connexion  
-
-
-
   if (empty($_SESSION['connecte'])) {
      header("location: connexion.php");
     echo "Identifiant ou mot de passe incorrect";
+  } 
 
-
-  }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,9 +34,8 @@ try {
     echo "<h1>Modifier un changement</h1>";}
     else {
         echo "<h1>Ajouter un changement</h1>";
-
     }
-    //echo $_SESSION['user_id'];
+
 ?>
 
     <div class="container">
@@ -51,24 +45,16 @@ try {
        
             <div class="col-md-6">
                 <label for="etage">Etage</label>
+               
+               
                 <select name="Etage" value="<?php echo $result['Etage'];?>"  id="etage">
             <?php if (!empty($_GET['id']) && isset($_GET['id'])) { echo "<option >".$result['Etage']."</option>";} else {echo "<option disabled selected hidden>Etage</option>";}?>
                     <option value="RDC">RDC</option>
-                    <option value="1er étage">1er étage</option>
-                    <option value="2e étage">2e étage</option>
-                    <option value="3e étage">3e étage</option>
-                    <option value="4e étage">4e étage</option>
-                    <option value="5e étage">5e étage</option>
-                    <option value="6e étage">6e étage</option>
-                    <option value="7e étage">7e étage</option>
-                    <option value="8e étage">8e étage</option>
-                    <option value="9e étage">9e étage</option>
-                    <option value="10e étage">10e étage</option>
-                    <option value="11e étage">11e étage</option>
+<?php  for ($i=1 ; $i<=11 ; $i++){?>
+                    <option value="Etage <?php echo $i?>">Etage <?php echo $i?> </option> <?php }?>
                 </select>
 
             </div>
-
 
             <div class="col-6">
                 <label for="position">Position</label>
@@ -96,22 +82,11 @@ try {
                 </div>
         </form>
     </div>
-
-
-
     <?php 
 }
-
-
 
 catch (PDOException $e) {
    echo 'Impossible de traiter les données. Erreur : ' . $e->getMessage();
 } ?>
 </body>
-
-
-
 </html>
-
-
-

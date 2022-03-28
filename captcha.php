@@ -4,14 +4,11 @@ require 'bdd.php';
 
 $_SESSION['captcha']= random_int(10000, 99999);
 
-
 $img=imagecreate(60, 30);
 $background= imagecolorallocate($img,0, 0, 255); // couleur de fond rouge
 //$white=imagecolorallocate($img,255,255,255);
 //$black=imagecolorallocate($img,0,0,0);
 $textcolor=imagecolorallocate($img, 255, 255, 255);
-
-
 
 imagestring($img,5,6,6,$_SESSION['captcha'],$textcolor);
 

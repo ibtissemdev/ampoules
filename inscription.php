@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
@@ -18,17 +18,17 @@
       <div class="col-md-12">
 
         <label for="identifiant" class="form-label">Identifiant</label>
-        <input type="text" pattern="^[A-Za-z '-]+$" maxlength="20" class="form-control" name="Login" id="identifiant" placeholder="Entrer votre identifiant" required>
+        <input type="text" pattern="#^[A-Za-z '-]+$#" maxlength="20" class="form-control" name="Login" id="identifiant" placeholder="Entrer votre identifiant" required>
       </div>
 
       <div class="col-md-6">
         <label for="motdepasse" class="form-label">Mot de passe</label>
-        <input type="password" requierd pattern="^[A-Za-z '-]+$" maxlength="20" class="form-control" name="password" id="password" placeholder="Entrer le mot de passe" required>
+        <input type="password" requierd pattern="#^[A-Za-z '-]+$#" maxlength="20" class="form-control" name="password" id="password" placeholder="Entrer le mot de passe" required>
       </div>
 
       <div class="col-md-6">
         <label for="motdepasse" class="form-label">Confirmer le mot de passe</label>
-        <input type="password" requierd pattern="^[A-Za-z '-]+$" maxlength="20" class="form-control" name="passwordconf" onblur="verif()" id="passwordconf" placeholder="Confirmer votre mot de passe" required>
+        <input type="password" requierd pattern="#^[A-Za-z '-]+#$" maxlength="20" class="form-control" name="passwordconf" onblur="verif()" id="passwordconf" placeholder="Confirmer votre mot de passe" required>
 
       </div>
       <a class="mdp" href="recup.php">Mot de passe oublié</a>
@@ -59,6 +59,14 @@
   <?php
 
   require 'bdd.php';
+  function valid_donnees($donnees){
+    $donnees = trim($donnees);
+    $donnees = stripslashes($donnees);
+    $donnees = htmlspecialchars($donnees);
+    return $donnees;
+  
+  }
+ 
   if (isset($_POST['captcha'])) {
 
     if ($_POST['captcha'] == $_SESSION['captcha']) {
@@ -87,7 +95,7 @@
           //Parcour un tableau associatif
           foreach ($colonne as $key => &$value) {
 
-            $sth->bindParam(':' . $key, $value);
+            valid_donnees($sth->bindParam(':' . $key, $value));
           }
 
           // }

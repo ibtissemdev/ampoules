@@ -1,28 +1,14 @@
 <?php 
 
 require 'bdd.php';
+
 if (isset($_POST['envoyer'])) {
 $search=$_POST['search']; 
-
-/*$sth= $pdo->prepare("SELECT * FROM message WHERE MATCH(message) AGAINST('$search')");
-$sth->execute();
-$result=$sth->fetchall();
-
-error_log(print_r($result),1) ;
-
-echo '<pre>'.print_r($result).'<br></pre>';
-} else {
-
-    echo 'erreur';
-}*/
 
 $sth=$pdo->prepare("SELECT message.date, message.message, user.Login, historique.Date FROM message INNER JOIN user ON user.id = message.user_id INNER JOIN historique on historique.message_id=message.id WHERE MATCH (message) AGAINST('$search')");
 $sth->execute();
 $resultat=$sth->fetchall();
 error_log(print_r($resultat,1));
-
-
-
 }
 ?>
 

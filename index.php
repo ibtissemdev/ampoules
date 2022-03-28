@@ -10,8 +10,19 @@ try {
     header("location: connexion.php");
     //   // echo "Identifiant ou mot de passe incorrect";
 
-
+ 
+  } else {
+                $sth = $pdo->prepare("SELECT Login From user WHERE Id = :id ");
+                $sth->bindValue(':id', $_SESSION['user_id']);
+                $sth->execute();
+                $result = $sth->fetch();     
   }
+
+  $sth = $pdo->prepare("SELECT Login From user INNER JOIN historique ON historique.user_id=user.Id");
+  $sth->execute();
+  $result2 = $sth->fetchAll();
+
+      
 
   //Récupérer le nombre d'enregistrements
   $count = $pdo->prepare("SELECT count(Id) as cpt  FROM historique");
@@ -22,7 +33,8 @@ try {
   //Pagination 
   @$page = $_GET["page"];
   if (empty($page)) $page = 1;
-  $nbr_elements_par_page = 4;
+  $nbr_elements_par_page =3;
+
   $nbr_de_pages = ceil($tcount[0]["cpt"] / $nbr_elements_par_page);
   $debut = ($page - 1) * $nbr_elements_par_page;
 
@@ -44,18 +56,21 @@ try {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Accueil</title>
   </head>
 
   <body>
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <button class="btn btn-secondary"><a href="deconnexion.php">Deconnexion</a></button>
 
+    <div class="utilisateur">
+    <p class='operateur'> Opérateur : <?php echo $result ['Login']?> </p>
+    <button class="btn btn-secondary"><a href="deconnexion.php">Deconnexion</a></button>
+    </div>
 
     <div class="container-fluid">
       <div class="entete">
-
+      <h1>Changement d'ampoules</h1>
 <form action="recherche.php" method="post">
   <label for="recherche">Recherche</label>
 <input type="search" name="search" >
@@ -63,26 +78,44 @@ try {
 
 </form>
 
-        <h1>Changement d'ampoules</h1>
+      
         <header><?= $tcount[0]["cpt"]; ?> Enregistrements au total</header>
 
         <div class="pagination">
           <?php
-          for ($i = 1; $i <= $nbr_elements_par_page; $i++) {
-            if ($page != $i) {
+         
+            $precedent=$page-1;
+            if ($page>1){
+              echo"<a href='?page=$precedent'>Précédent</a>&nbsp";
+          
+        }else {
+          echo "<a>précédent</a>&nbsp";
+        }
 
+          for ($i = 1; $i <=$nbr_de_pages; $i++) {
+            if ($page != $i) {
 
               echo "<a href='?page=$i'>$i</a>&nbsp";
             } else {
               echo "<a>$i</a>&nbsp";
+             
             }
           }
+         
+          $suivant=$page+1;
+          if ($suivant<=$nbr_de_pages){
+            echo "<a href='?page=$suivant'>Suivant</a>&nbsp";
+          } else {
+            echo "<a>Suivant</a>&nbsp";
+          }
+         
           ?>
         </div>
       </div>
       <div class="tableau">
         <table>
           <tr>
+          <th scope="col">Opérateur</th>
             <th scope="col">Etage</th>
             <th scope="col">Position</th>
             <th scope="col">Prix</th>
@@ -95,6 +128,7 @@ try {
           <?php for ($i = 0; $i < count($resultat); $i++) { ?>
 
             <tr>
+              <td><?php echo $result2[$i]['Login']  ?></td>
               <td><?php echo $resultat[$i]["Etage"] ?></td>
               <td><?php echo $resultat[$i]["Position"] ?></td>
               <td><?php echo $resultat[$i]["Prix"] ?></td>

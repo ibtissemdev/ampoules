@@ -41,6 +41,14 @@ function verif() {
      
 }
 
+function valid(value) {
+var caractere=  /^[<,>]+$/i;
+if(caractere.test(value)) {
+alert('Entrez uniquement des lettres'); 
+return false;
+}
+
+}
 
  
 

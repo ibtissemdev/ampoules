@@ -25,8 +25,6 @@ if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
     
     unset($_POST['envoyer'], $_POST['Id'], $_POST['message_id']);
 
-    // $user_id=$_SESSION['user_id']; 
-
     //Récupérer les clés dans un tableau
     $colonneName = array_keys($_POST);
     //Transforme le tableau en chaîne de caractère en y ajoutant une "," entre chaque élément
@@ -36,7 +34,6 @@ if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
 
     error_log(print_r($colonne1,1));
     error_log(print_r($colonne2,1));
-
 
     $sth = $pdo->prepare("INSERT INTO historique ($colonne1) VALUES ($colonne2)");
 
@@ -49,7 +46,6 @@ if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
       $sth->bindParam(':' . $key, $value);
     }
     $sth->execute();
-
 
     header('Location:index.php');
   }catch (Exception $e) {

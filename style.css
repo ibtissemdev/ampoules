@@ -158,3 +158,24 @@ align-items: center;
 .btnconnexion {
     align-items: center;
 }
+
+
+.utilisateur {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+p  {
+    font-size: 20px;
+    font-weight: 700;
+    color: #3eb4c3;
+}
+
+.message{
+margin-top: 40px;    
+display: flex;
+flex-direction: column;
+align-items: stretch;
+
+}

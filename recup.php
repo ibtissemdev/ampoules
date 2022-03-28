@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     
-    <title>Document</title>
+    <title>Récupération mot de passe</title>
 </head>
 <body>
 
@@ -28,12 +28,12 @@
           
             <div class="col-md-6">
               <label for="motdepasse" class="form-label">Mot de passe</label>
-              <input type="password" requierd pattern="^[A-Za-z '-]+$"  maxlength="20" class="form-control" name="Password" id="password"  placeholder="Entrer le mot de passe" required>
+              <input type="password" requierd pattern="#^[A-Za-z '-]+$#"  maxlength="20" class="form-control" name="Password" id="password"  placeholder="Entrer le mot de passe" required>
             </div>
 
             <div class="col-md-6">
               <label for="motdepasse" class="form-label">Confirmer le mot de passe</label>
-              <input type="password" requierd pattern="^[A-Za-z '-]+$"  maxlength="20"  class="form-control" name="passwordconf" onblur="verif()"  id="passwordconf" placeholder="Confirmer votre mot de passe" required>
+              <input type="password" requierd pattern="#^[A-Za-z '-]+$#"  maxlength="20"  class="form-control" name="passwordconf" onblur="verif()"  id="passwordconf" placeholder="Confirmer votre mot de passe" required>
               
             </div>
            
@@ -49,12 +49,14 @@
 <?php
 
 require 'bdd.php' ;
+
+
 if (isset($_POST['captcha'])) {
 
   if ($_POST['captcha'] == $_SESSION['captcha']) {
 if (isset($_POST['Email']) && $_POST['Tel']){
     error_log("post :".print_r($_POST, 1));
-    //$util="SELECT * FROM user WHERE Email=':email' ";//AND Tel=':tel'
+   
 
     $util="SELECT * FROM user WHERE Email='".$_POST['Email']."' AND Tel='".$_POST['Tel']."'";
     error_log($util);
