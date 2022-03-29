@@ -41,6 +41,7 @@ try {
     <div class="container">
         <form class="row g-3" action="ajout.php"  method="post">
         <input type="hidden" name="Id" value="<?php echo $result['Id']; ?>">
+        <input type="hidden" name="table" value="historique">
         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
        
             <div class="col-md-6">

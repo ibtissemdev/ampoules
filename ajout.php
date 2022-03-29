@@ -3,6 +3,8 @@ require 'bdd.php';
 if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
   //MODIFIER
   $colonne = $_POST;
+  $table= $_POST['table'];
+  unset($_POST['table']);
   unset($colonne['envoyer']);
   $colonneName = array_keys($colonne);
 
@@ -12,7 +14,7 @@ if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
   $colonne1 = implode(",", $result);
   $id = $_POST['Id'];
 
-  $sth = $pdo->prepare("UPDATE historique SET $colonne1 WHERE Id=$id");
+  $sth = $pdo->prepare("UPDATE $table SET $colonne1 WHERE Id=$id");
   foreach ($colonne as $key => &$value) {
     $sth->bindParam(':' . $key, $value);
   }
@@ -22,8 +24,11 @@ if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
 } elseif (isset($_POST['envoyer'])) {
     try {
     //AJOUTER
-    
-    unset($_POST['envoyer'], $_POST['Id'], $_POST['message_id']);
+    $table= $_POST['table'];
+    unset($_POST['table']);
+    unset($_POST['envoyer']);
+    unset($_POST['Id']);
+    unset($_POST['message_id']); 
 
     //Récupérer les clés dans un tableau
     $colonneName = array_keys($_POST);
@@ -35,7 +40,7 @@ if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
     error_log(print_r($colonne1,1));
     error_log(print_r($colonne2,1));
 
-    $sth = $pdo->prepare("INSERT INTO historique ($colonne1) VALUES ($colonne2)");
+    $sth = $pdo->prepare("INSERT INTO $table ($colonne1) VALUES ($colonne2)");
 
     error_log("INSERT INTO message ($colonne1) VALUES ($colonne2)");
     //Parcour un tableau associatif

@@ -20,12 +20,12 @@
       <div class="col-md-10">
 
         <label for="identifiant" class="form-label">Identifiant</label>
-        <input type="text" requierd pattern="#^[A-Za-zéè '-]+$#" maxlength="20" class="form-control" name="Login" id="identifiant" placeholder="Entrer votre identifiant" required>
+        <input type="text" maxlength="20" pattern="^[A-Za-zéè '-]+$" class="form-control" name="Login" id="identifiant" placeholder="Entrer votre identifiant" required>
       </div>
 
       <div class="col-md-10">
         <label for="motdepasse" class="form-label">Mot de passe</label>
-        <input type="password" requierd pattern="#^[A-Za-zéè '-]+$#" maxlength="20" class="form-control" name="Password" id="motdepasse" placeholder="Entrer le mot de passe" required>
+        <input type="password" pattern="^[A-Za-zéè '-]+$" maxlength="20" class="form-control" name="Password" id="motdepasse" placeholder="Entrer le mot de passe" required>
       </div>
 
       <a class="mdp" href="recup.php">Mot de passe oublié</a>
