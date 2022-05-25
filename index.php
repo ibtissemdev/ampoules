@@ -38,13 +38,13 @@ try {
   $sth = $pdo->prepare("SELECT * FROM historique LIMIT $debut, $nbr_elements_par_page");
   $sth->execute();
   $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);
-  print_r($resultat);
+  //print_r($resultat);
 
   //Sélectionne le login dans la table user qui a le même Id que dans la table hostorique
 $sth = $pdo->prepare("SELECT Login From user INNER JOIN historique ON historique.user_id=user.Id LIMIT $debut, $nbr_elements_par_page");
 $sth->execute();
 $result2 = $sth->fetchAll();
-error_log(print_r($result2,1));
+//error_log(print_r($result2,1));
 //echo 'result : ',print_r($result); 
 
 ?>

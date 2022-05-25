@@ -57,7 +57,7 @@ try {
       
             <div class="">
                 <label for="message">Entrez votre message</label>
-                <textarea onkeyup="valid(this.value)" class="" id="message" pattern="#^[A-Za-zéè '-]+$#" name="message" rows="5" cols="33" placeholder="Votre message"></textarea>
+                <input type="text" onKeyUp="valid(event)" class="" id="message" pattern="^[A-Za-zéè '-]+$" name="message" rows="5" cols="33" placeholder="Votre message">
             </div>
 
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">

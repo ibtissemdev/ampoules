@@ -86,7 +86,7 @@ try {
 
       if (empty($_SESSION['result'])) {
 
-        echo "<p class='entrer'>Veuillez entrer votre mot de passe !</p>";
+        echo "<p class='entrer'>Identifiant ou mot de passe incorrect !</p>";
       } else {
 
         //echo 'connexion réussie '; 
@@ -98,7 +98,7 @@ try {
       }
     } else {
 
-      echo '<h3 class="captcha">Le captcha est invalide !</h3> ';
+      echo '<h3 class="captcha">La vérification de code est invalide !</h3> ';
     }
   }
 } catch (PDOException $e) {

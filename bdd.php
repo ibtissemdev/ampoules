@@ -1,16 +1,17 @@
 <?php
 
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ampoules";
-$port='3306';
-$charset="utf8mb4";
-$conn="mysql:host=$servername;dbname=$dbname;port=$port;charset=$charset";
+//echo phpinfo();
+if($_SERVER ['HTTP_HOST']=='localhost') {
+    require_once "config.php";
+} else {
+    require_once "config_en_ligne.php"; 
+}
+
+
 
 try {
-$pdo = new \PDO($conn,$username);
+$pdo = new \PDO($conn,$username,$password);
 
 
 $sth = $pdo->prepare("SELECT * FROM historique");

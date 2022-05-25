@@ -4,7 +4,9 @@ if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
   //MODIFIER
   $colonne = $_POST;
   $table= $_POST['table'];
+  print_r($table);
   unset($_POST['table']);
+  unset($colonne['table']);
   unset($colonne['envoyer']);
   $colonneName = array_keys($colonne);
 
@@ -17,7 +19,9 @@ if (!empty($_POST['Id']) && ctype_digit($_POST['Id'])) {
   $sth = $pdo->prepare("UPDATE $table SET $colonne1 WHERE Id=$id");
   foreach ($colonne as $key => &$value) {
     $sth->bindParam(':' . $key, $value);
-  }
+  } 
+
+  print_r($sth);
   $sth->execute();
   header('Location:index.php');
 

@@ -41,9 +41,15 @@ function verif() {
      
 }
 
-function valid(value) {
-var caractere=  /^[<,>]+$/i;
-if(caractere.test(value)) {
+
+//function valid(evt){ alert(evt.keyCode) }
+
+function valid(evt) {
+const caractere=  /^[<,>]+$/i;
+console.log(evt);
+let conversion=String.fromCharCode(evt.keycode)
+console.log(evt.keycode);
+if(caractere.test(conversion)) {
 alert('Entrez uniquement des lettres'); 
 return false;
 }

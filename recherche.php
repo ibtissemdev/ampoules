@@ -8,7 +8,7 @@ $search=$_POST['search'];
 $sth=$pdo->prepare("SELECT message.date, message.message, user.Login, historique.Date FROM message INNER JOIN user ON user.id = message.user_id INNER JOIN historique on historique.message_id=message.id WHERE MATCH (message) AGAINST('$search')");
 $sth->execute();
 $resultat=$sth->fetchall();
-error_log(print_r($resultat,1));
+var_dump($search);
 }
 ?>
 
