@@ -5,10 +5,10 @@ require 'bdd.php';
 if (isset($_POST['envoyer'])) {
 $search=$_POST['search']; 
 
-$sth=$pdo->prepare("SELECT message.date, message.message, user.Login, historique.Date FROM message INNER JOIN user ON user.id = message.user_id INNER JOIN historique on historique.message_id=message.id WHERE MATCH (message) AGAINST('$search')");
+$sth=$pdo->prepare("SELECT message.date, message.message, user.Login FROM message INNER JOIN user ON user.id = message.user_id  WHERE MATCH (message) AGAINST('$search')");
 $sth->execute();
 $resultat=$sth->fetchall();
-var_dump($search);
+//var_dump($search);
 }
 ?>
 
@@ -33,7 +33,7 @@ var_dump($search);
             <th scope="col">Date du message</th>
             <th scope="col">Texte du message</th>
             <th scope="col">Auteur</th>
-            <th scope="col">Date de l'intervention</th>
+           
           </tr>
           <?php for ($i = 0; $i < count($resultat); $i++) { ?>
 
@@ -41,7 +41,7 @@ var_dump($search);
               <td><?php echo $resultat[$i]["date"] ?></td>
               <td><?php echo $resultat[$i]["message"] ?></td>
               <td><?php echo $resultat[$i]["Login"] ?></td>
-              <td><?php echo $resultat[$i]["Date"] ?></td>
+           
               
             </tr>
             <?php }?>
